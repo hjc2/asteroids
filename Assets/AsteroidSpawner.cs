@@ -50,4 +50,13 @@ public class AsteroidSpawner : MonoBehaviour
         }
     }
 
+    public void newLevel(){
+        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+
+        foreach (GameObject asteroid in asteroids)
+        {
+            Destroy(asteroid);
+        }
+    }
+
 }

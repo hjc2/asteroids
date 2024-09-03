@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerShip : MonoBehaviour
 {
+
+    public ScoreManager scoreManager;
     public float rotationSpeed = 180f;
     public float thrustForce = 5f;
     public float maxSpeed = 5f;
@@ -27,6 +29,8 @@ public class PlayerShip : MonoBehaviour
     {
         mainCamera = Camera.main;
         UpdateScreenBounds();
+
+        scoreManager = FindObjectOfType<ScoreManager>();
         
         if (thrustFireIndicator != null)
         {
@@ -151,7 +155,28 @@ public class PlayerShip : MonoBehaviour
         if (collision.gameObject.CompareTag("Asteroid"))
         {
             Destroy(collision.gameObject);
-            Destroy(gameObject);
+            // Destroy(gameObject);
+
+            LoseLife();
         }
     }
+
+    public void LoseLife()
+    {
+        AsteroidSpawner asteroidSpawner = FindObjectOfType<AsteroidSpawner>();
+        asteroidSpawner.newLevel();
+
+        transform.position = Vector3.zero;
+        velocity = Vector2.zero;
+
+        GameObject[] rockets = GameObject.FindGameObjectsWithTag("Rocket");
+
+        scoreManager.ResetScore();
+
+        foreach (GameObject rocket in rockets)
+        {
+            Destroy(rocket);
+        }
+    }
+
 }

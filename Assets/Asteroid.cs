@@ -4,6 +4,7 @@ public class Asteroid : MonoBehaviour
 {
 
     public GameObject asteroidPrefab;
+    private ScoreManager scoreManager;
 
     public float minSpeed = 1f;
     public float maxSpeed = 3f;
@@ -27,6 +28,8 @@ public class Asteroid : MonoBehaviour
         
         // Set a random lifetime for the asteroid
         lifetime = Random.Range(minLifetime, maxLifetime);
+
+        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     public void Initialize(Vector2 direction, float sizeA)
@@ -89,6 +92,8 @@ public class Asteroid : MonoBehaviour
 
             Destroy(collision.gameObject);
             Destroy(gameObject);
+
+            scoreManager.AddScore(10);
         }
     }
 
