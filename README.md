@@ -3,3 +3,5 @@
 * Trinity University
 * Hugh Coleman
 * Based on "Asteroids" game
+
+play at [hjc2.github.io/asteroids](https://hjc2.github.io/asteroids)
